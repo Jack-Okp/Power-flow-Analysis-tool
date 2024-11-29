@@ -1,0 +1,16 @@
+Requirements needed to 
+
+numpy
+pandas
+networkx
+
+on your terminal either your VS code termanl or pyharm terminal
+enter:
+pip install numpy pandas networkx
+
+to verify their installation 
+
+enter:
+pip show numpy pandas networkx
+
+

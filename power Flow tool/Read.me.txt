@@ -1,0 +1,101 @@
+BEFORE USAGE PLESE 
+the code has some short comings, new updates will be committed soon
+
+Numerical Stability:
+Newton-Raphson method might not always converge
+No handling for singular matrices in _build_jacobian()
+Hardcoded tolerance and max iterations may not work for all networks
+
+Contingency Analysis:
+Removes and re-adds edges without preserving original edge attributes completely
+Assumes successful Newton-Raphson convergence for each contingency
+
+Potential Bug in Indexing:
+Indexing assumes specific bus types ('PV', 'PQ')
+May fail if bus types are not exactly as expected
+Uses index-based access which can be fragile
+
+
+
+HOW TO USE THE CODE
+
+STEP 1. Required Software and Libraries
+Python Environment, Pycharm, VS code, etc
+Python 3.7 or higher.
+Python Libraries:
+numpy (for numerical computations)
+pandas (for handling tabular data)
+networkx (for graph-based modeling)
+
+STEP 2.  Input Data Files
+The code requires two CSV files: bus_file and line_file. These files contain the bus and line data, respectively, for the power grid.
+
+A. Bus File (bus_file)
+This file should include information about the buses (nodes) in the network.
+Required Columns:
+bus_id (Unique identifier for each bus, indexed from 0 to n−1.)
+type (Type of the bus: PV, PQ, or Slack. At least one Slack bus is required.)
+P_gen (Generated active power at the bus in MW.)
+P_load (Active power demand at the bus in MW.)
+Q_gen (Generated reactive power at the bus in MVar.)
+Q_load (Reactive power demand at the bus in MVar.)
+
+FOR EXAMPLE 
+bus_id,type,P_gen,P_load,Q_gen,Q_load
+0,Slack,50,0,30,0
+1,PQ,0,20,0,10
+2,PV,40,10,20,0
+
+B. Line File (line_file)
+This file should include information about the transmission lines (edges) in the network.
+Required Columns:
+from_bus (Bus ID at the sending end of the line.)
+to_bus (Bus ID at the receiving end of the line.)
+r (Resistance of the line in per unit (p.u.).)
+x (Reactance of the line in p.u.)
+b (Line susceptance in p.u.)
+
+FOR EXAMPLE 
+from_bus,to_bus,r,x,b
+0,1,0.01,0.05,0.02
+1,2,0.02,0.04,0.01
+2,0,0.015,0.03,0.02
+
+THE CODE SHOULD BE RUNIN A PYTHON ENVIRONMENT
+
+STEP 3
+
+Guidelines for Creating the Files
+Headers:
+
+Ensure the column headers match exactly as shown (case-sensitive).
+Bus IDs:
+
+The bus_id in bus_file.csv and from_bus, to_bus in line_file.csv must match and be consistent.
+Bus Types:
+
+Use Slack for the reference bus (voltage magnitude and angle are fixed).
+Use PV for buses where active power generation (P_gen) is specified.
+Use PQ for load buses where only P_load and Q_load are given.
+Units:
+
+Active power (P) in MW, reactive power (Q) in MVar.
+Resistance (r), reactance (x), and susceptance (b) in per unit (p.u.).
+File Format:
+
+Save the files as Comma-Separated Values (CSV).
+Use a plain text editor or spreadsheet software (e.g., Excel or Google Sheets).
+Validation:
+
+Verify that all buses referenced in the line_file.csv exist in the bus_file.csv.
+Ensure no duplicate or missing bus/line entries.
+
+
+How to Create the CSV Files
+Open a text editor or spreadsheet software.
+Input the headers and data as per the templates.
+Save the files as bus_file.csv and line_file.csv in the same directory as the Python script.
+By following this template, users can create the required CSV files correctly to ensure smooth execution of the PowerFlowAnalysis code.
+
+
+if experiencing difficulty contact me directly okpairejackson@gmail.com
